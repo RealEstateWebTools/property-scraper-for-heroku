@@ -41,6 +41,19 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+  # gem 'capistrano-unicorn-nginx'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rbenv-install'
+  gem 'capistrano-secrets-yml'
+  gem "capistrano-db-tasks", require: false
+  gem 'capistrano-sidekiq'
+  # gem 'capistrano-monit-recipes'
+  gem 'capistrano-monit-recipes', github: 'louishouette/capistrano-monit-recipes'
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
