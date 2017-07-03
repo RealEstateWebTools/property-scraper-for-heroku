@@ -2,12 +2,12 @@
 class CreatePropertyWebScraperListings < ActiveRecord::Migration[5.0]
   def change
     create_table :property_web_scraper_listings do |t|
-
       t.integer  :flags, default: 0, null: false
+      t.integer  :area_unit, default: 0, null: false
       t.string   :reference
       t.integer  :year_construction, default: 0, null: false
       t.integer  :count_bedrooms, default: 0, null: false
-      t.float  :count_bathrooms, default: 0, null: false
+      t.float :count_bathrooms, default: 0, null: false
       # turns out count_bathrooms in the US can be .5, 1.5 etc
       # so need a float for above
       t.integer  :count_toilets, default: 0, null: false
@@ -33,11 +33,17 @@ class CreatePropertyWebScraperListings < ActiveRecord::Migration[5.0]
       t.datetime :available_to_rent_from
       t.datetime :available_to_rent_till
 
-      t.string :price
+      t.string :price_string
+      t.float :price_float
+      t.monetize :price_sale
+      # above will create below in schema.rb:
+      # t.integer  "price_sale_cents",                     default: 0,     null: false
+      # t.string   "price_sale_currency",                  default: "EUR", null: false
+      t.monetize :price_rental
 
-      t.string   :currency
+      t.string :currency
 
-
+      t.string :address_string
       t.string :street_number
       t.string :street_name
       t.string :street_address
@@ -51,6 +57,8 @@ class CreatePropertyWebScraperListings < ActiveRecord::Migration[5.0]
 
       t.datetime :last_retrieved_at
       t.integer :import_host_id
+      # for real estate agent ref:
+      t.integer :re_agent_id
       t.string :import_url
       t.json :import_history, default: {}
 
@@ -58,9 +66,10 @@ class CreatePropertyWebScraperListings < ActiveRecord::Migration[5.0]
     end
 
     add_index :property_web_scraper_listings, :flags
-    add_index :property_web_scraper_listings, :price
+    add_index :property_web_scraper_listings, :price_float
+    add_index :property_web_scraper_listings, :price_rental_cents
+    add_index :property_web_scraper_listings, :price_sale_cents
     add_index :property_web_scraper_listings, :reference
     add_index :property_web_scraper_listings, :import_url
-
   end
 end
