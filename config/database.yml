@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: property-scraper-for-heroku_production
-  username: property-scraper-for-heroku
-  password: <%= ENV['PROPERTY-SCRAPER-FOR-HEROKU_DATABASE_PASSWORD'] %>
+  # username: property-scraper-for-heroku
+  # password: <%= ENV['PROPERTY-SCRAPER-FOR-HEROKU_DATABASE_PASSWORD'] %>

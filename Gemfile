@@ -53,6 +53,7 @@ group :development do
   gem 'capistrano-sidekiq'
   # gem 'capistrano-monit-recipes'
   gem 'capistrano-monit-recipes', github: 'louishouette/capistrano-monit-recipes'
+  # gem 'capistrano-postgresql'
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
