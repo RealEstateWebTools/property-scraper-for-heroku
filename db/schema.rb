@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629123917) do
+ActiveRecord::Schema.define(version: 20171208153157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170629123917) do
 
   create_table "property_web_scraper_listings", force: :cascade do |t|
     t.integer  "flags",                  default: 0,     null: false
+    t.integer  "area_unit",              default: 0,     null: false
     t.string   "reference"
     t.integer  "year_construction",      default: 0,     null: false
     t.integer  "count_bedrooms",         default: 0,     null: false
@@ -50,8 +51,14 @@ ActiveRecord::Schema.define(version: 20170629123917) do
     t.boolean  "for_sale",               default: false
     t.datetime "available_to_rent_from"
     t.datetime "available_to_rent_till"
-    t.string   "price"
+    t.string   "price_string"
+    t.float    "price_float"
+    t.integer  "price_sale_cents",       default: 0,     null: false
+    t.string   "price_sale_currency",    default: "USD", null: false
+    t.integer  "price_rental_cents",     default: 0,     null: false
+    t.string   "price_rental_currency",  default: "USD", null: false
     t.string   "currency"
+    t.string   "address_string"
     t.string   "street_number"
     t.string   "street_name"
     t.string   "street_address"
@@ -64,13 +71,16 @@ ActiveRecord::Schema.define(version: 20170629123917) do
     t.float    "longitude"
     t.datetime "last_retrieved_at"
     t.integer  "import_host_id"
+    t.integer  "re_agent_id"
     t.string   "import_url"
     t.json     "import_history",         default: {}
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.index ["flags"], name: "index_property_web_scraper_listings_on_flags", using: :btree
     t.index ["import_url"], name: "index_property_web_scraper_listings_on_import_url", using: :btree
-    t.index ["price"], name: "index_property_web_scraper_listings_on_price", using: :btree
+    t.index ["price_float"], name: "index_property_web_scraper_listings_on_price_float", using: :btree
+    t.index ["price_rental_cents"], name: "index_property_web_scraper_listings_on_price_rental_cents", using: :btree
+    t.index ["price_sale_cents"], name: "index_property_web_scraper_listings_on_price_sale_cents", using: :btree
     t.index ["reference"], name: "index_property_web_scraper_listings_on_reference", using: :btree
   end
 
