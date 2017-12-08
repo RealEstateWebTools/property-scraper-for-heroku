@@ -15,7 +15,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-config/secrets.yml
+#config/secrets.yml
 #git rm --cached config/database.yml
 #as below had already been checked-in, had to remove with above
 #config/database.yml
