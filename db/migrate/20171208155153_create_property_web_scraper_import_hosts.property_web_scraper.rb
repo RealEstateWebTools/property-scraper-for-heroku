@@ -8,6 +8,12 @@ class CreatePropertyWebScraperImportHosts < ActiveRecord::Migration[5.0]
       t.boolean :is_https
       t.json :details, default: {}
       t.string :slug
+      t.text :example_urls, array: true, default: []
+      t.text :invalid_urls, array: true, default: []
+      t.datetime :last_retrieval_at
+      t.string :valid_url_regex
+      t.string :pause_between_calls, default: "5.seconds"
+      t.string :stale_age, default: "1.day"
       t.timestamps
     end
 
